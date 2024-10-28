@@ -1,12 +1,11 @@
 package com.gila.validator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import com.gila.jpa.model.dto.MessageDTO;
 
 @Component("messageValidator")
 public class MessageValidator implements Validator{
@@ -21,7 +20,7 @@ public class MessageValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
+		MessageDTO.class.equals(clazz);
 		return false;
 	}
 }

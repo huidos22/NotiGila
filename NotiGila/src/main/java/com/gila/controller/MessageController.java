@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gila.jpa.model.dto.MessageDTO;
 import com.gila.validator.MessageValidator;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class MessageController {
@@ -30,22 +33,31 @@ public class MessageController {
 	}
 
 	@PostMapping(path = "/message")
-	public String sendMessage(@ModelAttribute("clienteForm") @Validated MessageDTO messageDTO,
+	public String sendMessage(@ModelAttribute("messageForm") @Validated MessageDTO messageDTO,
 			BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
+		
 		return "index";
 	}
 
 	@GetMapping("/")
-	public String index(Model model) {
-		model.addAttribute("recipient", "World");
+	public ModelAndView index(Model model, HttpServletRequest request) {
+		model.addAttribute("category", "");
+		model.addAttribute("message", "");
 		model.addAttribute("now", LocalDateTime.now());
-		return "index";
+		String view = "index";
+	    return new ModelAndView(view, "command", model);
 	}
 
 	@GetMapping("/properties")
 	@ResponseBody
 	java.util.Properties properties() {
 		return System.getProperties();
+	}
+	
+	@ModelAttribute(value = "messageForm")
+	public MessageDTO newEntity()
+	{
+	    return new MessageDTO();
 	}
 }

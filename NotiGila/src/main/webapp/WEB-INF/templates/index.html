@@ -30,6 +30,7 @@
 												<div class="form-outline mb-4">
 													<select class="form-select form-select-lg mb-3"
 														aria-label=".form-select-lg example" 
+														th:field="*{category}"
 														id="category">
 														<option value="" selected hidden>Select...</option>
 														<option value="Sports">Sports</option>
@@ -43,6 +44,7 @@
 												<div class="form-outline mb-5">
 													<textarea class="form-control form-control-lg"
 														id="message" rows="3"
+														th:field="*{message}"
 														placeholder="Ingrese su mensaje a enviar"></textarea>
 													<label class="form-label mb-0 "
 														for="message">Message</label>

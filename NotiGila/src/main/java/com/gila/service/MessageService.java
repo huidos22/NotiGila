@@ -14,6 +14,7 @@ import com.gila.jpa.model.Channel;
 import com.gila.jpa.model.Message;
 import com.gila.jpa.model.User;
 import com.gila.jpa.model.dto.MessageDTO;
+import com.gila.repository.CategoryRepository;
 import com.gila.repository.MessageRepository;
 import com.gila.repository.UserRepository;
 
@@ -34,12 +35,15 @@ public class MessageService {
 	private SMSService smsService;
 	@Autowired
 	private MessageRepository messageRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	public void sendMessage(MessageDTO message) throws CannotSendMessageException {
 
 		var category = message.getCategory();
 
-		List<User> usersCat = userRepository.findByCategory(category);
+		Category cat = categoryRepository.findByName(category.toUpperCase());
+		List<User> usersCat = userRepository.findBySubscribes(cat);
 		for (Iterator<User> iterator = usersCat.iterator(); iterator.hasNext();) {
 			User user = (User) iterator.next();
 

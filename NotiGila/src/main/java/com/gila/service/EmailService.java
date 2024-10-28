@@ -1,7 +1,6 @@
 package com.gila.service;
 
 import org.apache.tomcat.util.modeler.NotificationInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService extends NotificationInfo {
 	private static final long serialVersionUID = 1L;
-	@Autowired
 	private MailSender mailSender;
 
 	/**

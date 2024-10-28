@@ -44,8 +44,10 @@ public class MessageController {
 
 		try {
 			messageService.sendMessage(messageDTO);
+			model.addAttribute("result", "Message sent");
 		} catch (CannotSendMessageException e) {
 			log.error(e.getMessage());
+			model.addAttribute("result", e.getCause());
 		}
 
 		String view = "index";

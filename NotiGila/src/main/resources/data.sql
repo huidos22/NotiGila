@@ -1,11 +1,11 @@
 
-INSERT INTO USERS(id,name,email,phone)VALUES(100,'CARLOS RIVERA','carlos@gila.com','+5233389999');
-INSERT INTO USERS(id,name,email,phone)VALUES(101,'SOL RAMIREZ','sol@gila.com','+5233389999');
-INSERT INTO USERS(id,name,email,phone)VALUES(102,'SOFIA ALBA','sofia@gila.com','+5233389999');
-INSERT INTO USERS(id,name,email,phone)VALUES(103,'EMILIO BAEZA','emili@gila.com','+5233389999');
-INSERT INTO USERS(id,name,email,phone)VALUES(104,'CATALINA GOMEZ','cata@gila.com','+5233389999');
-INSERT INTO USERS(id,name,email,phone)VALUES(105,'JOSE RENOVATO','jose@gila.com','+5233389999');
-INSERT INTO USERS(id,name,email,phone)VALUES(106,'MIGUEL RIVERA','mig@gila.com','+5233389999');
+INSERT INTO USERS(id,name,email,phone)VALUES(100,'CARLOS RIVERA','carlos@gila.com','+5233119999');
+INSERT INTO USERS(id,name,email,phone)VALUES(101,'SOL RAMIREZ','sol@gila.com','+5233389959');
+INSERT INTO USERS(id,name,email,phone)VALUES(102,'SOFIA ALBA','sofia@gila.com','+5233384999');
+INSERT INTO USERS(id,name,email,phone)VALUES(103,'EMILIO BAEZA','emili@gila.com','+52333899449');
+INSERT INTO USERS(id,name,email,phone)VALUES(104,'CATALINA GOMEZ','cata@gila.com','+5233383399');
+INSERT INTO USERS(id,name,email,phone)VALUES(105,'JOSE RENOVATO','jose@gila.com','+5233300999');
+INSERT INTO USERS(id,name,email,phone)VALUES(106,'MIGUEL RIVERA','mig@gila.com','+5233339999');
 
 INSERT INTO CATEGORIES(ID,CATEGORY_NAME) VALUES(200,'SPORTS');
 INSERT INTO CATEGORIES(ID,CATEGORY_NAME) VALUES(201,'FINANCE');

@@ -29,10 +29,10 @@ public class User implements Serializable{
 	    @Column(nullable = false)
 	    private String name;
 	    
-	    @Column(nullable = true)
+	    @Column(nullable = true, unique = true)
 	    private String email;
 	    
-	    @Column(nullable = true)
+	    @Column(nullable = true, unique = true)
 	    private String phone;
 	    
 	    @OneToMany

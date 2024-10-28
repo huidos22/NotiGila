@@ -20,7 +20,6 @@ public class MessageValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		MessageDTO.class.equals(clazz);
-		return false;
+		return MessageDTO.class.equals(clazz);
 	}
 }

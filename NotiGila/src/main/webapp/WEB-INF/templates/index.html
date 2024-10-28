@@ -30,24 +30,22 @@
 												<div class="form-outline mb-4">
 													<select class="form-select form-select-lg mb-3"
 														aria-label=".form-select-lg example" 
-														th:field="*{category}"
-														id="formControlSelect1">
-														<option selected hidden>Select...</option>
-														<option>Sports</option>
-														<option>Finance</option>
-														<option>Movie</option>
+														id="category">
+														<option value="" selected hidden>Select...</option>
+														<option value="Sports">Sports</option>
+														<option value="Finance">Finance</option>
+														<option value="Movie">Movie</option>
 													</select>
 													<label class="form-label mb-0"
-														for="exampleFormControlSelect1">Category</label>
+														for="category">Category</label>
 												</div>
 
 												<div class="form-outline mb-5">
 													<textarea class="form-control form-control-lg"
-														id="formControlTextarea1" rows="3"
-														th:field="*{message}"
+														id="message" rows="3"
 														placeholder="Ingrese su mensaje a enviar"></textarea>
 													<label class="form-label mb-0 "
-														for="formControlTextarea1">Message</label>
+														for="message">Message</label>
 												</div>
 												<button
 													class="btn btn-primary btn-lg btn-rounded gradient-custom text-body px-5"

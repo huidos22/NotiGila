@@ -33,20 +33,18 @@ public class MessageController {
 	}
 
 	@PostMapping(path = "/message")
-	public String sendMessage(@ModelAttribute("messageForm") @Validated MessageDTO messageDTO,
+	public ModelAndView sendMessage(@ModelAttribute("messageForm") @Validated MessageDTO messageDTO,
 			BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
-		
-		return "index";
+		String view = "index";
+	    return new ModelAndView(view, "messageForm", new MessageDTO());
 	}
 
 	@GetMapping("/")
 	public ModelAndView index(Model model, HttpServletRequest request) {
-		model.addAttribute("category", "");
-		model.addAttribute("message", "");
 		model.addAttribute("now", LocalDateTime.now());
 		String view = "index";
-	    return new ModelAndView(view, "command", model);
+	    return new ModelAndView(view, "messageForm", new MessageDTO());
 	}
 
 	@GetMapping("/properties")
@@ -55,9 +53,4 @@ public class MessageController {
 		return System.getProperties();
 	}
 	
-	@ModelAttribute(value = "messageForm")
-	public MessageDTO newEntity()
-	{
-	    return new MessageDTO();
-	}
 }

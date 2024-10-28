@@ -1,17 +1,108 @@
 package com.gila;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+
+import lombok.NoArgsConstructor;
+
 @Configuration
 @EnableWebMvc
-public class NotiGilaWebConfig implements WebMvcConfigurer{
-	 @Override
-	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	        registry
-	          .addResourceHandler("/webjars/**")
-	          .addResourceLocations("/webjars/");
-	    }
+@ComponentScan
+@NoArgsConstructor
+public class NotiGilaWebConfig implements WebMvcConfigurer, ApplicationContextAware {
+
+	private ApplicationContext applicationContext;
+
+	public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
+	/* ******************************************************************* */
+	/* GENERAL CONFIGURATION ARTIFACTS */
+	/* Static Resources, i18n Messages, Formatters (Conversion Service) */
+	/* ******************************************************************* */
+
+	/*
+	 * Dispatcher configuration for serving static resources
+	 */
+	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { "classpath:/META-INF/resources/",
+			"classpath:/resources/", "classpath:/static/", "classpath:/public/" };
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/").resourceChain(false);
+	}
+
+	/*
+	 * Message externalization/internationalization
+	 */
+	@Bean
+	ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("Messages");
+		return messageSource;
+	}
+
+	@Bean
+	DateFormatter dateFormatter() {
+		return new DateFormatter();
+	}
+
+	/* **************************************************************** */
+	/* THYMELEAF-SPECIFIC ARTIFACTS */
+	/* TemplateResolver <- TemplateEngine <- ViewResolver */
+	/* **************************************************************** */
+
+	@Bean
+	SpringResourceTemplateResolver templateResolver() {
+		// SpringResourceTemplateResolver automatically integrates with Spring's own
+		// resource resolution infrastructure, which is highly recommended.
+		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		templateResolver.setApplicationContext(this.applicationContext);
+		templateResolver.setPrefix("/WEB-INF/templates/");
+		templateResolver.setSuffix(".html");
+		// HTML is the default value, added here for the sake of clarity.
+		templateResolver.setTemplateMode(TemplateMode.HTML);
+		// Template cache is true by default. Set to false if you want
+		// templates to be automatically updated when modified.
+		templateResolver.setCacheable(true);
+		return templateResolver;
+	}
+
+	@Bean
+	SpringTemplateEngine templateEngine() {
+		// SpringTemplateEngine automatically applies SpringStandardDialect and
+		// enables Spring's own MessageSource message resolution mechanisms.
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver());
+		// Enabling the SpringEL compiler with Spring 4.2.4 or newer can
+		// speed up execution in most scenarios, but might be incompatible
+		// with specific cases when expressions in one template are reused
+		// across different data types, so this flag is "false" by default
+		// for safer backwards compatibility.
+		templateEngine.setEnableSpringELCompiler(true);
+		return templateEngine;
+	}
+
+	@Bean
+	ThymeleafViewResolver viewResolver() {
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setTemplateEngine(templateEngine());
+		return viewResolver;
+	}
+
 }
- 

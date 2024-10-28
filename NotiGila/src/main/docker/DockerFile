@@ -1,0 +1,5 @@
+FROM  	alpine/java:22-jdk
+VOLUME /tmp
+COPY notigila-1.0.jar /
+EXPOSE 8080
+CMD ["java", "-jar", "notigila-1.0.jar"]

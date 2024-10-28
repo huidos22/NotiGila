@@ -1,0 +1,70 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css" />
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<title>Message sender</title>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="page-wrapper">
+			<section class="intro">
+				<div class="mask d-flex align-items-center h-100" style="background-color: #D6D6D6;">
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+								<div class="card" style="border-radius: 1rem;">
+									<div class="card-body p-5 text-center">
+
+										<div class="my-md-5 pb-5">
+
+											<h1 class="fw-bold mb-0">Send your Messages</h1>
+
+											<i class="fas fa-user-astronaut fa-3x my-5"></i>
+
+											<div class="form-outline mb-4">
+												<select class="form-select form-select-lg mb-3"
+													aria-label=".form-select-lg example" id="formControlSelect1">
+													<option selected hidden>Select...</option>
+													<option>Sports</option>
+													<option>Finance</option>
+													<option>Movie</option>
+												</select>
+												<label class="form-label mb-0"
+													for="exampleFormControlSelect1">Category</label>
+											</div>
+
+											<div class="form-outline mb-5">
+												<textarea class="form-control form-control-lg" id="formControlTextarea1"
+													rows="3" placeholder="Ingrese su mensaje a enviar"></textarea>
+												<label class="form-label mb-0 "
+													for="formControlTextarea1">Message</label>
+											</div>
+												<button
+													class="btn btn-primary btn-lg btn-rounded gradient-custom text-body px-5"
+													type="submit">Send</button>
+										</div>
+
+										<div>
+											<h2 class="mb-0"> Find your reports:<br><a href="#!"
+													class="fw-bold mb-0 ">Reports</a></h2>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+</body>
+
+</html>

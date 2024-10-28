@@ -51,16 +51,22 @@ public class MessageController {
 		}
 
 		String view = "index";
-		return new ModelAndView(view, "messageForm", messageDTO);
+		return new ModelAndView(view, "messageForm", new MessageDTO());
 	}
 
 	@GetMapping("/")
 	public ModelAndView index(Model model, HttpServletRequest request) {
 		model.addAttribute("now", LocalDateTime.now());
 		String view = "index";
+		model.addAttribute("result", "");
 		return new ModelAndView(view, "messageForm", new MessageDTO());
 	}
-
+	@GetMapping("/reports")
+	public ModelAndView reports(Model model, HttpServletRequest request) {
+		String view = "reports";
+		model.addAttribute("result", "");
+		return new ModelAndView(view, "messageForm", new MessageDTO());
+	}
 	@GetMapping("/properties")
 	@ResponseBody
 	java.util.Properties properties() {

@@ -12,9 +12,11 @@ public class MessageValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		
+		MessageDTO mes = (MessageDTO)target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "message", "NotEmpty.messageForm.message");
-		
+		if(mes.getMessage() != null || mes.getMessage().length() <= 0){
+			errors.rejectValue("message", "NotEmpty.messageForm.message");
+		}
 		
 	}
 
